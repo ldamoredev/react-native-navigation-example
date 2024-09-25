@@ -5,16 +5,21 @@ import { FC, useRef } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Context } from '../context/Context'
 import { ActivityIndicator, View } from 'react-native'
+import { InitializingAppScreen } from '../screens/InitializationAppScreen'
+import { TabsLayout } from './layout/TabsLayout'
 
 const Stack = createNativeStackNavigator()
 
 export const AppNavigation: FC<Props> = ({ context }) => {
-    if (!context) return <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator  />
-    </View>
+    if (!context) return <InitializingAppScreen />
     const navigator = context.navigator
     const screens = context.screens
     const routeNameRef = useRef<string>()
+
+    const Layout = () => {
+        const tabsLayout = new TabsLayout([{ name: 'Home' }, { name: 'Settings' }])
+        return tabsLayout.render(screens, 'Home')
+    }
 
     return (
         <NavigationContainer
@@ -29,7 +34,7 @@ export const AppNavigation: FC<Props> = ({ context }) => {
             }}
         >
             <Stack.Navigator>
-                <Stack.Screen name="Main" component={context.layout} options={{ headerShown: false, gestureEnabled: false }} />
+                <Stack.Screen name="Main" component={Layout} options={{ headerShown: false, gestureEnabled: false }} />
                 {screens.map(toScreen)}
             </Stack.Navigator>
         </NavigationContainer>

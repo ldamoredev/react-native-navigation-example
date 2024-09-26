@@ -1,7 +1,8 @@
 import { TabsLayout } from './TabsLayout'
-import { ScreenDefinition } from '../screensDefinitions/ScreenDefinition'
+import { useAppContext } from '../../context/AppContext'
 
-export const MainLayout = (screens: ScreenDefinition[]) => {
+export const MainLayout = () => {
+    const { screens } = useAppContext()
     const tabsLayout = new TabsLayout([{ name: 'Home' }, { name: 'Settings' }])
     return tabsLayout.render(screens, 'Home')
 }

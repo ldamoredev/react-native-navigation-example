@@ -7,6 +7,7 @@ import { Context } from '../context/Context'
 import { ActivityIndicator, View } from 'react-native'
 import { InitializingAppScreen } from '../initialiazer/InitializationAppScreen'
 import { TabsLayout } from './layout/TabsLayout'
+import { MainLayout } from './layout/MainLayout'
 
 const Stack = createNativeStackNavigator()
 
@@ -15,11 +16,6 @@ export const AppNavigation: FC<Props> = ({ context }) => {
     const navigator = context.navigator
     const screens = context.screens
     const routeNameRef = useRef<string>()
-
-    const Layout = () => {
-        const tabsLayout = new TabsLayout([{ name: 'Home' }, { name: 'Settings' }])
-        return tabsLayout.render(screens, 'Home')
-    }
 
     return (
         <NavigationContainer
@@ -34,7 +30,7 @@ export const AppNavigation: FC<Props> = ({ context }) => {
             }}
         >
             <Stack.Navigator>
-                <Stack.Screen name="Main" component={Layout} options={{ headerShown: false, gestureEnabled: false }} />
+                <Stack.Screen name="Main" component={MainLayout} options={{ headerShown: false, gestureEnabled: false }} />
                 {screens.map(toScreen)}
             </Stack.Navigator>
         </NavigationContainer>

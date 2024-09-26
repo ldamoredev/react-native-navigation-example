@@ -4,12 +4,10 @@ import { ReactNavigator } from './ui/navigation/navigator/ReactNavigator'
 import { RootView } from './ui/RootView'
 import { ScreenVisibilities } from './ui/navigation/screensDefinitions/ScreenVisibilities'
 import { ScreenTypes } from './ui/navigation/screensDefinitions/ScreenTypes'
-import { HomeScreenDefinition } from './ui/modules/HomeModule/screens/HomeScreen'
-import { SettingsScreenDefinition } from './ui/modules/SettingsModule/screens/SettingsScreen'
-import { DetailsScreenDefinition } from './ui/modules/HomeModule/screens/DetailsScreen'
 import { registerRootComponent } from 'expo'
 import { InitializingAppScreenDefinition } from './ui/initialiazer/InitializationAppScreen'
 import { AppModule } from './ui/modules/AppModule'
+import { Authenticator } from './ui/auth/Authenticator'
 
 export class App {
     private screens: ScreenDefinition[] = []
@@ -22,13 +20,14 @@ export class App {
 
     private createContext(): Context {
         return {
+            authenticator: new Authenticator(),
             navigator: new ReactNavigator(),
             screens: this.screens,
         }
     }
 
     private rootComponent = () => {
-        return <RootView context={this.context}  />
+        return <RootView context={this.context} />
     }
 
     addScreen(definition: ScreenDefinition) {

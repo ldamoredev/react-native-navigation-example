@@ -14,6 +14,6 @@ export const DetailsScreen: React.FC = () => {
 export const DetailsScreenDefinition: ScreenDefinition = {
     name: 'Details',
     component: DetailsScreen,
-    visibility: ScreenVisibilities.Public,
+    visibility: ScreenVisibilities.Private,
 }
 

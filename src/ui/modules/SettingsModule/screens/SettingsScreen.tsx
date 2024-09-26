@@ -20,5 +20,5 @@ export const SettingsScreen: React.FC = () => {
 export const SettingsScreenDefinition: ScreenDefinition = {
     name: 'Settings',
     component: SettingsScreen,
-    visibility: ScreenVisibilities.Public,
+    visibility: ScreenVisibilities.Private,
 }

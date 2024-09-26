@@ -12,6 +12,6 @@ export const InitializingAppScreen = () => {
 
 export const InitializingAppScreenDefinition: ScreenDefinition = {
     name: 'InitializationApp',
-    component: DetailsScreen,
-    visibility: ScreenVisibilities.Public,
+    component: InitializingAppScreen,
+    visibility: ScreenVisibilities.Always,
 }

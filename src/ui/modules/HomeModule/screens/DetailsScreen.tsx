@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native'
 import * as React from 'react'
-import { ScreenDefinition } from '../navigation/screensDefinitions/ScreenDefinition'
-import { ScreenVisibilities } from '../navigation/screensDefinitions/ScreenVisibilities'
+import { ScreenDefinition } from '../../../navigation/screensDefinitions/ScreenDefinition'
+import { ScreenVisibilities } from '../../../navigation/screensDefinitions/ScreenVisibilities'
 
 export const DetailsScreen: React.FC = () => {
     return (

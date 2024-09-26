@@ -4,10 +4,12 @@ import { ReactNavigator } from './ui/navigation/navigator/ReactNavigator'
 import { RootView } from './ui/RootView'
 import { ScreenVisibilities } from './ui/navigation/screensDefinitions/ScreenVisibilities'
 import { ScreenTypes } from './ui/navigation/screensDefinitions/ScreenTypes'
-import { HomeScreenDefinition } from './ui/screens/HomeScreen'
-import { SettingsScreenDefinition } from './ui/screens/SettingsScreen'
-import { DetailsScreenDefinition } from './ui/screens/DetailsScreen'
+import { HomeScreenDefinition } from './ui/modules/HomeModule/screens/HomeScreen'
+import { SettingsScreenDefinition } from './ui/modules/SettingsModule/screens/SettingsScreen'
+import { DetailsScreenDefinition } from './ui/modules/HomeModule/screens/DetailsScreen'
 import { registerRootComponent } from 'expo'
+import { InitializingAppScreenDefinition } from './ui/initialiazer/InitializationAppScreen'
+import { AppModule } from './ui/modules/AppModule'
 
 export class App {
     private screens: ScreenDefinition[] = []
@@ -15,12 +17,13 @@ export class App {
 
     constructor() {
         this.context = this.createContext()
+        this.addScreen(InitializingAppScreenDefinition)
     }
 
     private createContext(): Context {
         return {
             navigator: new ReactNavigator(),
-            screens: [HomeScreenDefinition, SettingsScreenDefinition, DetailsScreenDefinition],
+            screens: this.screens,
         }
     }
 
@@ -31,6 +34,10 @@ export class App {
     addScreen(definition: ScreenDefinition) {
         this.failIfScreenExists(definition.name)
         this.screens.push({ visibility: ScreenVisibilities.Always, type: ScreenTypes.Regular, title: '', ...definition })
+    }
+
+    addModule(appModule: AppModule) {
+        appModule.initFor(this)
     }
 
     private getScreen(name: string): ScreenDefinition | undefined {

@@ -5,13 +5,13 @@ import { FC, useRef } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Context } from '../context/Context'
 import { ActivityIndicator, View } from 'react-native'
-import { InitializingAppScreen } from '../screens/InitializationAppScreen'
+import { InitializingAppScreen } from '../initialiazer/InitializationAppScreen'
 import { TabsLayout } from './layout/TabsLayout'
 
 const Stack = createNativeStackNavigator()
 
 export const AppNavigation: FC<Props> = ({ context }) => {
-    if (!context) return <InitializingAppScreen />
+    if (!context) return <>{context.screens.find(s => s.name === "InitializationApp").component}</>
     const navigator = context.navigator
     const screens = context.screens
     const routeNameRef = useRef<string>()

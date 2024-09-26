@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Button, Text, View } from 'react-native'
-import { ScreenDefinition } from '../navigation/screensDefinitions/ScreenDefinition'
-import { ScreenVisibilities } from '../navigation/screensDefinitions/ScreenVisibilities'
-import { useAppContext } from '../context/AppContext'
+import { ScreenDefinition } from '../../../navigation/screensDefinitions/ScreenDefinition'
+import { ScreenVisibilities } from '../../../navigation/screensDefinitions/ScreenVisibilities'
+import { useAppContext } from '../../../context/AppContext'
 
 export const HomeScreen: React.FC = () => {
     const { navigator } = useAppContext()

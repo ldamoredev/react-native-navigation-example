@@ -1,7 +1,7 @@
 import { Button, Text, View } from 'react-native'
 import * as React from 'react'
-import { ScreenVisibilities } from '../../../navigation/screensDefinitions/ScreenVisibilities'
-import { ScreenDefinition } from '../../../navigation/screensDefinitions/ScreenDefinition'
+import { ScreenVisibilities } from '../../../../services/navigation/screensDefinitions/ScreenVisibilities'
+import { ScreenDefinition } from '../../../../services/navigation/screensDefinitions/ScreenDefinition'
 import { useAppContext } from '../../../context/AppContext'
 
 export const LoginScreen: React.FC = () => {

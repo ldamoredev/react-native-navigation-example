@@ -1,9 +1,9 @@
 import React from 'react'
-import { NavigationProps } from '../navigation/navigator/NavigationProps'
+import { NavigationProps } from '../../services/navigation/navigator/NavigationProps'
 import { Dialog } from './Dialog'
 import { Text } from 'react-native'
-import { ScreenDefinition } from '../navigation/screensDefinitions/ScreenDefinition'
-import { ScreenVisibilities } from '../navigation/screensDefinitions/ScreenVisibilities'
+import { ScreenDefinition } from '../../services/navigation/screensDefinitions/ScreenDefinition'
+import { ScreenVisibilities } from '../../services/navigation/screensDefinitions/ScreenVisibilities'
 
 export const ModalExample: React.FC<NavigationProps> = (props) => {
     const close = () => {

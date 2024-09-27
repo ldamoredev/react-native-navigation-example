@@ -1,13 +1,13 @@
-import { ScreenDefinition } from './ui/navigation/screensDefinitions/ScreenDefinition'
+import { ScreenDefinition } from './services/navigation/screensDefinitions/ScreenDefinition'
 import { Context } from './ui/context/Context'
-import { ReactNavigator } from './ui/navigation/navigator/ReactNavigator'
+import { ReactNavigator } from './services/navigation/navigator/ReactNavigator'
 import { RootView } from './ui/RootView'
-import { ScreenVisibilities } from './ui/navigation/screensDefinitions/ScreenVisibilities'
-import { ScreenTypes } from './ui/navigation/screensDefinitions/ScreenTypes'
+import { ScreenVisibilities } from './services/navigation/screensDefinitions/ScreenVisibilities'
+import { ScreenTypes } from './services/navigation/screensDefinitions/ScreenTypes'
 import { registerRootComponent } from 'expo'
 import { InitializingAppScreenDefinition } from './ui/initialiazer/InitializationAppScreen'
 import { AppModule } from './ui/modules/AppModule'
-import { Authenticator } from './ui/auth/Authenticator'
+import { Authenticator } from './services/auth/Authenticator'
 
 export class App {
     private screens: ScreenDefinition[] = []

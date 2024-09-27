@@ -1,6 +1,6 @@
-import { ReactNavigator } from '../navigation/navigator/ReactNavigator'
-import { ScreenDefinition } from '../navigation/screensDefinitions/ScreenDefinition'
-import { Authenticator } from '../auth/Authenticator'
+import { ReactNavigator } from '../../services/navigation/navigator/ReactNavigator'
+import { ScreenDefinition } from '../../services/navigation/screensDefinitions/ScreenDefinition'
+import { Authenticator } from '../../services/auth/Authenticator'
 
 export interface Context {
     authenticator: Authenticator

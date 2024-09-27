@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { AppContext } from './context/AppContext'
-import { AppNavigation } from './navigation/AppNavigation'
+import { AppNavigation } from '../services/navigation/AppNavigation'
 import { Context } from './context/Context'
 
 export const RootView: FC<Props> = ({ context }) => {

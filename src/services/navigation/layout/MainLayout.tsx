@@ -1,5 +1,5 @@
 import { TabsLayout } from './TabsLayout'
-import { useAppContext } from '../../context/AppContext'
+import { useAppContext } from '../../../ui/context/AppContext'
 
 export const MainLayout = () => {
     const { screens } = useAppContext()

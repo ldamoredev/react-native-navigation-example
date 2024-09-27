@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { ScreenDefinition } from './screensDefinitions/ScreenDefinition'
 import * as React from 'react'
 import { FC, useRef } from 'react'
@@ -7,7 +7,6 @@ import { Context } from '../context/Context'
 import { MainLayout } from './layout/MainLayout'
 import { ScreenTypes } from './screensDefinitions/ScreenTypes'
 import { ScreenVisibilities } from './screensDefinitions/ScreenVisibilities'
-import { useObservableProperty } from '../utils/useObservableProperty'
 import { useObservable } from '../utils/useObservable'
 import { AnonymousIdentity } from '../auth/identity/AnonymousIdentity'
 
@@ -18,10 +17,9 @@ const INITIALIZATION_APP_SCREEN_NAME = "InitializationApp"
 export const AppNavigation: FC<Props> = ({ context }) => {
     if (!context) return <>{context.screens.find(s => s.name === INITIALIZATION_APP_SCREEN_NAME).component}</>
     const navigator = context.navigator
-    const isAuthenticated = useObservableProperty(context.authenticator.authenticated)
     const identity = useObservable(context.authenticator.identity, new AnonymousIdentity())
-    console.log('identity', identity.name, identity.isAuthenticated)
-    const screens = getScreens(context, identity.isAuthenticated)
+    const screens = getScreens(context.screens, identity.isAuthenticated)
+    const modals = getModals(context.screens)
     const routeNameRef = useRef<string>()
 
     return (
@@ -40,16 +38,19 @@ export const AppNavigation: FC<Props> = ({ context }) => {
         >
             <Stack.Navigator>
                 { identity.isAuthenticated && <Stack.Screen name="Main" component={MainLayout} options={{headerShown: false, gestureEnabled: false}}/> }
-                {screens.map(toScreen)}
+                { screens.map(toScreen) }
+                { modals.length > 0 && <Stack.Group screenOptions={modalGroupOptions}>{modals.map(toScreen)}</Stack.Group> }
             </Stack.Navigator>
         </NavigationContainer>
     )
 }
 
-function getScreens(context: Context, isAuthenticated: boolean) {
-    console.log('getScreens', isAuthenticated)
-    const initialScreen = getInitialScreen(context.screens, isAuthenticated)
-    const screens = getScreensByVisibility(context.screens, visibilityFor(isAuthenticated))
+const modalGroupOptions = { presentation: 'transparentModal', headerShown: false } satisfies NativeStackNavigationOptions
+
+
+function getScreens(screenDefinitions: ScreenDefinition[], isAuthenticated: boolean) {
+    const initialScreen = getInitialScreen(screenDefinitions, isAuthenticated)
+    const screens = getScreensByVisibility(screenDefinitions, visibilityFor(isAuthenticated))
         .filter(s =>
             s.type === ScreenTypes.Regular &&
             !isMainLayoutScreen(s.name) &&
@@ -57,6 +58,11 @@ function getScreens(context: Context, isAuthenticated: boolean) {
             s.name !== INITIALIZATION_APP_SCREEN_NAME
         )
     return [initialScreen, ...screens].filter(it => it !== null)
+}
+
+function getModals(screens: ScreenDefinition[]): ScreenDefinition[] {
+    let screenDefinitions = screens.filter(s => s.type === ScreenTypes.Modal)
+    return screenDefinitions
 }
 
 function isMainLayoutScreen(name: string) {
@@ -79,7 +85,6 @@ function getInitialScreen(screens: ScreenDefinition[], isAuthenticated: boolean)
 }
 
 const toScreen = (definition: ScreenDefinition) => {
-    console.log(definition)
     return (
         <Stack.Screen
             key={definition.name}

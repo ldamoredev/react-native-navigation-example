@@ -35,6 +35,11 @@ export class App {
         this.screens.push({ visibility: ScreenVisibilities.Always, type: ScreenTypes.Regular, title: '', ...definition })
     }
 
+    addModal(definition: ScreenDefinition) {
+        this.failIfScreenExists(definition.name)
+        this.screens.push({ visibility: ScreenVisibilities.Always, type: ScreenTypes.Modal, title: '', ...definition })
+    }
+
     addModule(appModule: AppModule) {
         appModule.initFor(this)
     }

@@ -14,6 +14,9 @@ export const HomeScreen: React.FC = () => {
                 onPress={() => navigator.navigate('Details')}
             />
             <View style={{ marginTop: 20 }}>
+                <Button title="Open modal example" onPress={() => navigator.navigate('ModalExample')} />
+            </View>
+            <View style={{ marginTop: 20 }}>
                 <Button title="Logout" onPress={() => authenticator.logout()} />
             </View>
         </View>
